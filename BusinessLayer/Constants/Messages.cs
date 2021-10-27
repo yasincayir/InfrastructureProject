@@ -13,5 +13,7 @@ namespace BusinessLayer.Constants
         public static string ProductUpdateInvalid = "Product did not updated!";
         public static string MaintenanceTime="Maintenance time";
         public static string ProductListed = "Product listed";
+        internal static string ProductQuantityInvalid="Daha fazla ürün eklenemez!";
+        internal static string ProductAlreadyExist="Product name already exist!";
     }
 }
