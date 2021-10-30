@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.BusinessAspects.Autofac;
 using BusinessLayer.Constants;
 using BusinessLayer.ValidationRules.FluentValidation;
 using CoreLayer.Aspects.Autofac.Validation;
@@ -22,6 +23,9 @@ namespace BusinessLayer.Concrete.Managers
         {
             _productDal = productDal;
         }
+
+
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
