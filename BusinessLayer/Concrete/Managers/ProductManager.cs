@@ -2,6 +2,9 @@
 using BusinessLayer.BusinessAspects.Autofac;
 using BusinessLayer.Constants;
 using BusinessLayer.ValidationRules.FluentValidation;
+using CoreLayer.Aspects.Autofac.Caching;
+using CoreLayer.Aspects.Autofac.Performance;
+using CoreLayer.Aspects.Autofac.Transaction;
 using CoreLayer.Aspects.Autofac.Validation;
 using CoreLayer.CrossCuttingConcerns.Validation.FluentValidation;
 using CoreLayer.Utilities.Business;
@@ -25,8 +28,9 @@ namespace BusinessLayer.Concrete.Managers
         }
 
 
-        [SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             IResult result= BusinessRules.Run
@@ -61,15 +65,15 @@ namespace BusinessLayer.Concrete.Managers
             }
             return new SuccessResult();
         }
+
+        [CacheAspect]
         public IDataResult<List<Product>> GetAllProduct()
         {
-            if (DateTime.Now.Hour==23)
-            {
-                return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductListed);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Product> GetById(int id)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == id));
@@ -80,6 +84,18 @@ namespace BusinessLayer.Concrete.Managers
             
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Product product)
+        {
+            Add(product);
+            if (product.UnitPrice < 10)
+            {
+                throw new Exception("");
+            }
+            Add(product);
+            return null;
         }
     }
 }
