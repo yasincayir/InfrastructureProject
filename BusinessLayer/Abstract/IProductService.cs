@@ -10,6 +10,7 @@ namespace BusinessLayer.Abstract
     {
         IDataResult<List<Product>> GetAllProduct();
         IDataResult<Product> GetById(int id);
+        IDataResult<List<Product>> GetByCategory(int id);
         IResult Add(Product product);
         IResult Update(Product product);
         IResult AddTransactionalTest(Product product);

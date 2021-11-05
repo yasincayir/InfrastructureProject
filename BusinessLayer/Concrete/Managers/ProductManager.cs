@@ -27,6 +27,10 @@ namespace BusinessLayer.Concrete.Managers
             _productDal = productDal;
         }
 
+        public IDataResult<List<Product>> GetByCategory(int id)
+        {
+          return   new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.CategoryId==id));
+        }
 
         [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]

@@ -24,5 +24,7 @@ namespace BusinessLayer.Constants
         public static string SuccessfulLogin="Success login ";
         public static string UserAlreadyExists="User Already exist";
         public static string AccessTokenCreated="Access token created";
+        public static string CategoryAdded="Category Added";
+        public static string CategoriesListed="Categories Listed";
     }
 }
