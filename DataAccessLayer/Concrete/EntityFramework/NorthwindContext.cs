@@ -27,7 +27,7 @@ namespace DataAccessLayer.Concrete.EntityFramework
 
             modelBuilder.Entity<Product>().Property(p => p.ProductId).HasColumnName("ProductID");
             modelBuilder.Entity<Product>().Property(p => p.ProductName).HasColumnName("ProductName");
-            modelBuilder.Entity<Product>().Property(p => p.QuantityPerUnit).HasColumnName("QuantityPerUnit");
+            modelBuilder.Entity<Product>().Property(p => p.UnitsInStock).HasColumnName("UnitsInStock");
             modelBuilder.Entity<Product>().Property(p => p.CategoryId).HasColumnName("CategoryID");
             modelBuilder.Entity<Product>().Property(p => p.UnitPrice).HasColumnName("UnitPrice");
 

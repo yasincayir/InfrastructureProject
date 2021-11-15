@@ -32,7 +32,7 @@ namespace BusinessLayer.Concrete.Managers
           return   new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.CategoryId==id));
         }
 
-        [SecuredOperation("product.add")]
+        //[SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)

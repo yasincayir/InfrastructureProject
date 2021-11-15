@@ -12,7 +12,7 @@ namespace BusinessLayer.ValidationRules.FluentValidation
         {
             RuleFor(p => p.ProductName).MinimumLength(2);
             RuleFor(p => p.ProductName).NotEmpty();
-            RuleFor(p => p.UnitPrice).GreaterThan(0);
+            RuleFor(p => p.UnitPrice).GreaterThan(10);
             RuleFor(p => p.UnitPrice).NotEmpty();
         }
     }
